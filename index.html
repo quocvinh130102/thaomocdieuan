@@ -150,6 +150,73 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
+        /* PHẦN ĐÁNH GIÁ (FEEDBACK) NẰM TRÊN FORM */
+        .feedback-section {
+            padding: 25px 15px;
+            background: #fff;
+            margin: 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+        }
+
+        .feedback-title {
+            text-align: center;
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .feedback-slider {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feedback-card {
+            background: #faf8f5;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .customer-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .customer-status {
+            font-size: 11px;
+            color: var(--primary-light);
+            background: rgba(44, 122, 75, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .feedback-text {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* FORM ĐẶT HÀNG */
         .order-section {
             padding: 30px 20px;
             background: #fff;
@@ -309,9 +376,9 @@
         .commit-item:hover { transform: translateY(-3px); }
         .commit-icon { font-size: 30px; }
 
-        /* FOOTER ĐÚNG CHUẨN MẪU BẠN GỬI (HÌNH ẢNH 2) */
+        /* FOOTER */
         .main-footer {
-            background: #11261a; /* Màu nền rêu tối chuẩn footer mẫu */
+            background: #11261a; 
             color: #d1dbcd;
             padding: 45px 20px 35px;
             border-top-left-radius: 28px;
@@ -424,7 +491,7 @@
         
         <!-- 1. HERO BANNER -->
         <section class="section-wrapper fade-in-section">
-            <img src="90c65a44-7239-434b-9177-6a9adf8bce70.png" alt="Thảo Mộc Ngâm Chân Diệu An" class="img-fluid">
+            <img src="banner.jpg" alt="Thảo Mộc Ngâm Chân Diệu An" class="img-fluid">
         </section>
 
         <!-- 2. BÁO GIÁ -->
@@ -440,20 +507,55 @@
 
         <!-- 3. SHOWCASE SẢN PHẨM -->
         <section class="image-showcase fade-in-section">
-            <img src="65539ec0-d30f-4b49-aca6-6e20a65d23f5.png" alt="Sản phẩm Diệu An thực tế" class="img-fluid">
+            <img src="sanpham.jpg" alt="Sản phẩm Diệu An thực tế" class="img-fluid">
         </section>
 
         <!-- 4. THÀNH PHẦN -->
         <section class="section-wrapper fade-in-section">
-            <img src="83bdc514-87f5-4bfa-9cd2-29ee1133c096.png" alt="Thành phần thiên nhiên" class="img-fluid">
+            <img src="thanhphan.jpg" alt="Thành phần thiên nhiên" class="img-fluid">
         </section>
 
         <!-- 5. HƯỚNG DẪN SỬ DỤNG -->
         <section class="section-wrapper fade-in-section">
-            <img src="772b7f44-b39e-4977-9211-78c2fea4f46b.png" alt="Hướng dẫn sử dụng và Lợi ích" class="img-fluid">
+            <img src="hdsd.jpg" alt="Hướng dẫn sử dụng và Lợi ích" class="img-fluid">
         </section>
 
-        <!-- 6. FORM ĐẶT HÀNG (CHỈ 2 LỰA CHỌN) -->
+        <!-- 6. PHẦN FEEDBACK KHÁCH HÀNG (NẰM TRÊN FORM ĐẶT HÀNG) -->
+        <section class="feedback-section fade-in-section">
+            <h3 class="feedback-title">Khách Hàng Nói Gì Về Diệu An</h3>
+            <div class="feedback-slider">
+                
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <span class="customer-name">Chị Lan Hương (Hà Nội)</span>
+                        <span class="customer-status">Đã mua 2 hộp</span>
+                    </div>
+                    <div class="rating-stars">★★★★★</div>
+                    <p class="feedback-text">"Mình bị mất ngủ kinh niên, từ ngày ngâm chân thảo mộc này vào buổi tối ngủ sâu giấc hẳn, chân lại ấm và không bị tê mỏi nữa. Rất đáng tiền!"</p>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <span class="customer-name">Cô Minh Thư (TP.HCM)</span>
+                        <span class="customer-status">Đã mua combo Mua 2 Tặng 1</span>
+                    </div>
+                    <div class="rating-stars">★★★★★</div>
+                    <p class="feedback-text">"Mua combo tặng thêm 1 hộp tính ra quá hời, mùi thảo mộc thơm dễ chịu lắm, ngâm xong người nhẹ nhõm hẳn. Shop giao hàng nhanh, đóng gói cẩn thận."</p>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <span class="customer-name">Anh Hoàng Nam (Đà Nẵng)</span>
+                        <span class="customer-status">Đã mua 1 hộp</span>
+                    </div>
+                    <div class="rating-stars">★★★★★</div>
+                    <p class="feedback-text">"Mua cho mẹ dùng, mẹ khen dạo này đỡ đau nhức khớp hẳn vào ban đêm. Sẽ tiếp tục ủng hộ shop dài dài."</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. FORM ĐẶT HÀNG (2 LỰA CHỌN) -->
         <section id="form-dat-hang" class="order-section fade-in-section">
             <h3>ĐIỀN THÔNG TIN NHẬN HÀNG</h3>
             <form action="#" method="POST">
@@ -520,7 +622,7 @@
             </div>
         </section>
 
-        <!-- FOOTER CHÍNH CHUẨN XÁC THEO ẢNH MẪU CỦA BẠN -->
+        <!-- FOOTER CHÍNH -->
         <footer class="main-footer">
             <div class="footer-brand">
                 <div class="footer-brand-title">
