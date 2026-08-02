@@ -134,6 +134,13 @@
         }
 
         .btn-cta:active { transform: scale(0.97); }
+        .btn-cta:disabled {
+            background: #8fa38a;
+            border-color: #8fa38a;
+            animation: none;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
 
         @keyframes pulse-glow {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
@@ -483,6 +490,81 @@
             animation: pulse-glow 2s infinite;
             box-shadow: 0 4px 15px rgba(217, 48, 37, 0.4);
         }
+
+        /* --- STYLES CHO POPUP THÔNG BÁO --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(4px);
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .popup-content {
+            background: #fff;
+            padding: 35px 20px 25px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 340px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .popup-icon {
+            width: 70px;
+            height: 70px;
+            background: #e8f5e9;
+            color: #4CAF50;
+            font-size: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 0 10px rgba(76, 175, 80, 0.1);
+        }
+
+        .popup-title {
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .popup-text {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        
+        .popup-text strong {
+            color: var(--danger);
+        }
+
+        .btn-close-popup {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(26, 71, 42, 0.2);
+            transition: background 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -555,12 +637,12 @@
             </div>
         </section>
 
-        <!-- 7. FORM ĐẶT HÀNG (3 LỰA CHỌN) -->
+        <!-- 7. FORM ĐẶT HÀNG -->
         <section id="form-dat-hang" class="order-section fade-in-section">
             <h3>ĐIỀN THÔNG TIN NHẬN HÀNG</h3>
             
-            <!-- LINK CỦA BẠN ĐÃ ĐƯỢC THÊM VÀO THUỘC TÍNH ACTION BÊN DƯỚI -->
-            <form action="https://script.google.com/macros/s/AKfycbz6NrrIlGDQEqaXGWIDu-CvdxuLTS1yKfCLlV-EjVrW8HzRxpwwX7K1FzaHaZsQizTV/exec" method="POST">
+            <!-- Đã thêm ID cho form để JS bắt sự kiện -->
+            <form id="orderForm" action="https://script.google.com/macros/s/AKfycbz6NrrIlGDQEqaXGWIDu-CvdxuLTS1yKfCLlV-EjVrW8HzRxpwwX7K1FzaHaZsQizTV/exec" method="POST">
                 
                 <div class="form-group">
                     <input type="text" name="ho_ten" class="form-input" placeholder="Họ và tên của bạn *" required>
@@ -576,7 +658,7 @@
 
                 <p style="font-weight: 700; margin-bottom: 12px; color: var(--primary);">Chọn Gói Sản Phẩm Ưu Đãi:</p>
                 <div class="package-selector">
-                    <!-- Option 1: Mua 1 SP -->
+                    <!-- Option 1 -->
                     <label class="package-card" for="pkg1">
                         <input type="radio" name="combo" id="pkg1" value="1_hop" checked>
                         <div class="radio-custom"></div>
@@ -586,7 +668,7 @@
                         </div>
                     </label>
 
-                    <!-- Option 2: Mua 3 SP -->
+                    <!-- Option 2 -->
                     <label class="package-card" for="pkg2">
                         <input type="radio" name="combo" id="pkg2" value="3_hop">
                         <div class="radio-custom"></div>
@@ -596,7 +678,7 @@
                         </div>
                     </label>
 
-                    <!-- Option 3: Mua 5 Tặng 1 -->
+                    <!-- Option 3 -->
                     <label class="package-card vip-deal" for="pkg3">
                         <input type="radio" name="combo" id="pkg3" value="5_tang_1">
                         <div class="radio-custom"></div>
@@ -607,7 +689,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn-cta" style="margin-top: 15px;">XÁC NHẬN ĐẶT HÀNG</button>
+                <button type="submit" id="submitBtn" class="btn-cta" style="margin-top: 15px;">XÁC NHẬN ĐẶT HÀNG</button>
             </form>
         </section>
 
@@ -669,9 +751,20 @@
 
     </div>
 
-    <!-- SCRIPT HIỆU ỨNG CUỘN TRANG -->
+    <!-- POPUP THÔNG BÁO ĐẶT HÀNG THÀNH CÔNG -->
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup-content">
+            <div class="popup-icon">✓</div>
+            <h3 class="popup-title">ĐẶT HÀNG THÀNH CÔNG!</h3>
+            <p class="popup-text">Cảm ơn bạn đã tin tưởng. <strong>Diệu An</strong> sẽ sớm gọi điện xác nhận đơn hàng và tư vấn thêm cho bạn nhé!</p>
+            <button class="btn-close-popup" id="closePopupBtn">Đóng & Trở về</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT XỬ LÝ GỬI FORM NGẦM VÀ POPUP -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // 1. Hiệu ứng cuộn trang
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -682,6 +775,50 @@
 
             document.querySelectorAll('.fade-in-section').forEach(section => {
                 observer.observe(section);
+            });
+
+            // 2. Xử lý Gửi Form và Popup
+            const form = document.getElementById('orderForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const popup = document.getElementById('successPopup');
+            const closeBtn = document.getElementById('closePopupBtn');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Ngăn hành động chuyển trang mặc định
+                
+                // Đổi text nút thành Đang xử lý và khóa nút để tránh bấm 2 lần
+                const originalText = submitBtn.innerText;
+                submitBtn.innerText = 'ĐANG XỬ LÝ...';
+                submitBtn.disabled = true;
+
+                // Lấy dữ liệu từ form
+                const formData = new FormData(form);
+
+                // Dùng fetch gửi ngầm dữ liệu tới Google Apps Script
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Rất quan trọng: giúp gửi đi mà không bị block bởi chính sách bảo mật CORS của Google
+                })
+                .then(() => {
+                    // Mở popup thành công
+                    popup.style.display = 'flex';
+                    
+                    // Xóa dữ liệu cũ trên form và khôi phục nút bấm
+                    form.reset();
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                })
+                .catch(error => {
+                    alert('Có lỗi xảy ra khi kết nối mạng, vui lòng thử lại sau!');
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                });
+            });
+
+            // Xử lý nút Đóng trên Popup
+            closeBtn.addEventListener('click', function() {
+                popup.style.display = 'none';
             });
         });
     </script>
