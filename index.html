@@ -150,7 +150,6 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
-        /* PHẦN ĐÁNH GIÁ (FEEDBACK) NẰM TRÊN FORM */
         .feedback-section {
             padding: 25px 15px;
             background: #fff;
@@ -322,6 +321,7 @@
         .card-details { display: flex; flex-direction: column; }
         .card-title { font-weight: 700; font-size: 16px; color: var(--text-main); }
         .card-desc { font-size: 13px; color: var(--danger); font-weight: 600; margin-top: 3px; }
+        .card-desc.free-ship { color: var(--primary); font-weight: 700; }
         .card-desc.vip-text { color: #e65100; font-weight: 800; }
 
         .commitment-section {
@@ -520,7 +520,7 @@
             <img src="hdsd.jpg" alt="Hướng dẫn sử dụng và Lợi ích" class="img-fluid">
         </section>
 
-        <!-- 6. PHẦN FEEDBACK KHÁCH HÀNG (NẰM TRÊN FORM ĐẶT HÀNG) -->
+        <!-- 6. PHẦN FEEDBACK KHÁCH HÀNG -->
         <section class="feedback-section fade-in-section">
             <h3 class="feedback-title">Khách Hàng Nói Gì Về Diệu An</h3>
             <div class="feedback-slider">
@@ -528,7 +528,7 @@
                 <div class="feedback-card">
                     <div class="feedback-header">
                         <span class="customer-name">Chị Lan Hương (Hà Nội)</span>
-                        <span class="customer-status">Đã mua 2 hộp</span>
+                        <span class="customer-status">Đã mua 3 hộp</span>
                     </div>
                     <div class="rating-stars">★★★★★</div>
                     <p class="feedback-text">"Mình bị mất ngủ kinh niên, từ ngày ngâm chân thảo mộc này vào buổi tối ngủ sâu giấc hẳn, chân lại ấm và không bị tê mỏi nữa. Rất đáng tiền!"</p>
@@ -537,7 +537,7 @@
                 <div class="feedback-card">
                     <div class="feedback-header">
                         <span class="customer-name">Cô Minh Thư (TP.HCM)</span>
-                        <span class="customer-status">Đã mua combo Mua 2 Tặng 1</span>
+                        <span class="customer-status">Đã mua combo Mua 5 Tặng 1</span>
                     </div>
                     <div class="rating-stars">★★★★★</div>
                     <p class="feedback-text">"Mua combo tặng thêm 1 hộp tính ra quá hời, mùi thảo mộc thơm dễ chịu lắm, ngâm xong người nhẹ nhõm hẳn. Shop giao hàng nhanh, đóng gói cẩn thận."</p>
@@ -555,21 +555,23 @@
             </div>
         </section>
 
-        <!-- 7. FORM ĐẶT HÀNG (2 LỰA CHỌN) -->
+        <!-- 7. FORM ĐẶT HÀNG (3 LỰA CHỌN) -->
         <section id="form-dat-hang" class="order-section fade-in-section">
             <h3>ĐIỀN THÔNG TIN NHẬN HÀNG</h3>
-            <form action="#" method="POST">
+            
+            <!-- LINK CỦA BẠN ĐÃ ĐƯỢC THÊM VÀO THUỘC TÍNH ACTION BÊN DƯỚI -->
+            <form action="https://script.google.com/macros/s/AKfycbz6NrrIlGDQEqaXGWIDu-CvdxuLTS1yKfCLlV-EjVrW8HzRxpwwX7K1FzaHaZsQizTV/exec" method="POST">
                 
                 <div class="form-group">
-                    <input type="text" class="form-input" placeholder="Họ và tên của bạn *" required>
+                    <input type="text" name="ho_ten" class="form-input" placeholder="Họ và tên của bạn *" required>
                 </div>
                 
                 <div class="form-group">
-                    <input type="tel" class="form-input" placeholder="Số điện thoại liên hệ *" required pattern="[0-9]{10}">
+                    <input type="tel" name="so_dien_thoai" class="form-input" placeholder="Số điện thoại liên hệ *" required pattern="[0-9]{10}">
                 </div>
                 
                 <div class="form-group">
-                    <input type="text" class="form-input" placeholder="Địa chỉ nhận hàng (Số nhà, Phường, Xã) *" required>
+                    <input type="text" name="dia_chi" class="form-input" placeholder="Địa chỉ nhận hàng (Số nhà, Phường, Xã) *" required>
                 </div>
 
                 <p style="font-weight: 700; margin-bottom: 12px; color: var(--primary);">Chọn Gói Sản Phẩm Ưu Đãi:</p>
@@ -580,17 +582,27 @@
                         <div class="radio-custom"></div>
                         <div class="card-details">
                             <span class="card-title">1 Hộp - 139.000đ</span>
-                            <span class="card-desc">Phù hợp dùng thử (Phí ship 20k)</span>
+                            <span class="card-desc">Phí ship 20k</span>
                         </div>
                     </label>
 
-                    <!-- Option 2: Mua 2 Tặng 1 Miễn Phí Ship -->
-                    <label class="package-card vip-deal" for="pkg2">
-                        <input type="radio" name="combo" id="pkg2" value="2_tang_1">
+                    <!-- Option 2: Mua 3 SP -->
+                    <label class="package-card" for="pkg2">
+                        <input type="radio" name="combo" id="pkg2" value="3_hop">
                         <div class="radio-custom"></div>
                         <div class="card-details">
-                            <span class="card-title" style="color: #b25900;">Mua 2 Tặng 1 - 278.000đ</span>
-                            <span class="card-desc vip-text">🎁 TẶNG THÊM 1 HỘP & MIỄN PHÍ VẬN CHUYỂN</span>
+                            <span class="card-title">3 Hộp - 417.000đ</span>
+                            <span class="card-desc free-ship">MIỄN PHÍ VẬN CHUYỂN</span>
+                        </div>
+                    </label>
+
+                    <!-- Option 3: Mua 5 Tặng 1 -->
+                    <label class="package-card vip-deal" for="pkg3">
+                        <input type="radio" name="combo" id="pkg3" value="5_tang_1">
+                        <div class="radio-custom"></div>
+                        <div class="card-details">
+                            <span class="card-title" style="color: #b25900;">Mua 5 Tặng 1 - 695.000đ</span>
+                            <span class="card-desc vip-text">🎁 TẶNG THÊM 1 HỘP & MIỄN PHÍ SHIP</span>
                         </div>
                     </label>
                 </div>
